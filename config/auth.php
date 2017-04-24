@@ -51,6 +51,11 @@ return [
 			'provider' => 'admins',
 		],
 
+		'admin-api' => [
+			'driver' => 'token',
+			'provider' => 'admins',
+		],
+
 	],
 
     /*
@@ -107,6 +112,10 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+			'provider' => 'admins',
+			'table' => 'password_resets',
+			'expire' => 60,
+		],
     ],
 
 ];
