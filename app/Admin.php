@@ -9,6 +9,7 @@ class Admin extends Authenticatable
 {
     use Notifiable;
 
+
     /**
      * The attributes that are mass assignable.
      *
