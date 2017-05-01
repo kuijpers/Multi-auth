@@ -55,11 +55,26 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
-        }
+	{
 
-        return redirect()->guest(route('login'));
+		if ($request->expectsJson())
+			{
+				return response()->json([ 'error' => 'Unauthenticated.' ], 401);
+			}
+
+		$guard = array_get($exception->guards(), 0);
+
+		// By checking what guard it is we set a dynamic route name
+		switch ($guard){
+			case 'admin':
+				$login = 'admin.login';
+					break;
+
+			default:
+				$login = 'login';
+					break;
+			}
+
+        return redirect()->guest(route($login));
     }
 }
